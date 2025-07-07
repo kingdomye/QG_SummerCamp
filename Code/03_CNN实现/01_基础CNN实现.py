@@ -1,11 +1,11 @@
 # ================================
-# @File         : 03_构建神经网络.py
+# @File         : 01_基础CNN实现.py
 # @Time         : 2025/07/07
 # @Author       : Yingrui Chen
-# @description  : 利用pytorch构建神经网络模型
+# @description  : 利用pytorch构建CNN神经网络模型
+#                 数据集位置：../01_Pytorch/data
 # ================================
 
-import os
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -20,14 +20,14 @@ else:
 
 # 加载训练数据
 training_data = datasets.FashionMNIST(
-    root="data",
+    root="../01_Pytorch/data",
     train=True,
     download=True,
     transform=ToTensor()
 )
 
 test_data = datasets.FashionMNIST(
-    root="data",
+    root="../01_Pytorch/data",
     train=False,
     download=True,
     transform=ToTensor()
@@ -36,25 +36,45 @@ test_data = datasets.FashionMNIST(
 train_dataloader = DataLoader(training_data, batch_size=64)
 test_dataloader = DataLoader(test_data, batch_size=64)
 
-# 构建神经网络
-class Network(nn.Module):
+# 构建CNN神经网络
+class ConvNetwork(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.flatten = nn.Flatten()
-        self.linear = nn.Sequential(
-            nn.Linear(28*28, 512), nn.ReLU(), 
-            nn.Linear(512, 512), nn.ReLU(), 
-            nn.Linear(512, 10),
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(
+                in_channels=1,              # 输入通道数量
+                out_channels=16,            # 输出通道数量
+                kernel_size=5,              # 卷积核大小
+                stride=1,                   # 卷积核移动步长
+                padding=2                   # 填充大小
+            ), 
+            nn.ReLU(), 
+            nn.MaxPool2d(kernel_size=2)
         )
+
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(
+                in_channels=16, 
+                out_channels=32, 
+                kernel_size=5, 
+                stride=1, 
+                padding=2
+            ), 
+            nn.ReLU(), 
+            nn.MaxPool2d(kernel_size=2)
+        )
+
+        self.out = nn.Linear(32*7*7, 10)
     
     def forward(self, x):
-        x = self.flatten(x)
-        output = self.linear(x)
-        
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = x.view(x.size(0), -1)
+        output = self.out(x)
+
         return output
     
-# 模型训练
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
@@ -63,41 +83,37 @@ def train(dataloader, model, loss_fn, optimizer):
         loss = loss_fn(pred, y)
 
         loss.backward()
-        optimizer.step()                # 根据反向传播得到的梯度调整参数
-        optimizer.zero_grad()           # 重置模型梯度，防止重复计算
+        optimizer.step()
+        optimizer.zero_grad()
 
         if batch % 100 == 0:
             loss, current = loss.item(), batch * batch_size + len(X)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
-# 测试模型
 def test(dataloader, model, loss_fn):
     model.eval()
-    size = len(dataloader.dataset)
+    size = len(dataloader)
     num_batches = len(dataloader)
     test_loss, correct = 0, 0
 
-    # 测试时使用no_grad()可以提高计算效率
     with torch.no_grad():
         for X, y in dataloader:
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
             correct += (pred.argmax(1)==y).type(torch.float).sum().item()
-        
+
         test_loss /= num_batches
         correct /= size
-        print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
-    
+        print(f"Test Error: \n Accuracy: {(correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+
 
 if __name__ == '__main__':
-    model = Network().to(device='cpu')
+    model = ConvNetwork()
     learning_rate = 1e-3
     batch_size = 64
-    epochs = 10
+    epochs = 3
 
-    # 定义损失函数
     loss_fn = nn.CrossEntropyLoss()
-    # 定义优化器
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
     for epoch in range(epochs):
@@ -105,6 +121,4 @@ if __name__ == '__main__':
         train(train_dataloader, model, loss_fn, optimizer)
         test(test_dataloader, model, loss_fn)
 
-    # 保存模型
-    torch.save(model, 'model.pth')
-    # 加载模型使用torch.load()方法
+    torch.save(model, 'conv_model.pth')
