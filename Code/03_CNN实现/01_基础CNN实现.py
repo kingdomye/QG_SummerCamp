@@ -2,7 +2,7 @@
 # @File         : 01_基础CNN实现.py
 # @Time         : 2025/07/07
 # @Author       : Yingrui Chen
-# @description  : 利用pytorch构建CNN神经网络模型
+# @description  : 利用pytorch构建CNN卷积网络模型
 #                 数据集位置：../01_Pytorch/data
 # ================================
 
