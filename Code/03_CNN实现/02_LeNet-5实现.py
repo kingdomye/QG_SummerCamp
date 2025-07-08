@@ -3,8 +3,8 @@
 # @Time         : 2025/07/07
 # @Author       : Yingrui Chen
 # @description  : 利用pytorch构建Lenet-5卷积网络模型
-#               Lenet-5模型在手写体识别上具有很大优势
-#               MNIST数据集在下载时出现问题，暂时无法测试
+#                 Lenet-5模型在手写体识别上具有很大优势
+#                 MNIST数据集在下载时出现问题，暂时无法测试
 # ================================
 
 import torch

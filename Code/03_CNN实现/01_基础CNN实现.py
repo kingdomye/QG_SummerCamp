@@ -41,6 +41,7 @@ class ConvNetwork(nn.Module):
     def __init__(self):
         super().__init__()
 
+        # (1, 28, 28) -> (16, 28, 28) -> (16, 14, 14)
         self.conv1 = nn.Sequential(
             nn.Conv2d(
                 in_channels=1,              # 输入通道数量
@@ -53,6 +54,7 @@ class ConvNetwork(nn.Module):
             nn.MaxPool2d(kernel_size=2)
         )
 
+        # (16, 14, 14) -> (32, 14, 14) -> (32, 7, 7)
         self.conv2 = nn.Sequential(
             nn.Conv2d(
                 in_channels=16, 
@@ -79,6 +81,7 @@ def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
     for batch, (X, y) in enumerate(dataloader):
+        X, y = X.to(device), y.to(device)
         pred = model(X)
         loss = loss_fn(pred, y)
 
@@ -98,6 +101,7 @@ def test(dataloader, model, loss_fn):
 
     with torch.no_grad():
         for X, y in dataloader:
+            X, y = X.to(device), y.to(device)
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
             correct += (pred.argmax(1)==y).type(torch.float).sum().item()
@@ -108,7 +112,7 @@ def test(dataloader, model, loss_fn):
 
 
 if __name__ == '__main__':
-    model = ConvNetwork()
+    model = ConvNetwork().to(device)
     learning_rate = 1e-3
     batch_size = 64
     epochs = 3
