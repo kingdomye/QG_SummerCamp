@@ -26,7 +26,6 @@ class AlexNet(nn.Module):
     def __init__(self):
         super(AlexNet, self).__init__()
 
-        # (1, 227, 227) -> (96, 55, 55)
         self.conv1 = nn.Sequential(
             nn.Conv2d(
                 in_channels=1, 
@@ -38,7 +37,6 @@ class AlexNet(nn.Module):
             nn.MaxPool2d(3, 2)
         )
 
-        # (96, 55, 55) -> (256, 27, 27)
         self.conv2 = nn.Sequential(
             nn.Conv2d(96, 256, 5, 1, 2),
             nn.ReLU(),
@@ -127,11 +125,6 @@ if __name__ == '__main__':
 
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate)
-
-    # from matplotlib import pyplot as plt
-    # data_sample = next(iter(train_dataloader))
-    # plt.imshow(np.squeeze(data_sample[0][0]), cmap="gray")
-    # plt.show()
 
     for epoch in range(epochs):
         print(f"--------------Epoch {epoch}--------------")
