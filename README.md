@@ -17,7 +17,7 @@
 [4、RNN实现](./Code/04_RNN实现)
 
 - 基础RNN模型预测正弦波
-- 基于LSTM对广州市降水量的研究
+- 基于LSTM对广州市降水量的研究（及爬虫实战）
 
 ## Note📒⬇️[同步ricckker知乎](https://www.zhihu.com/column/c_1885651761630527854)
 
