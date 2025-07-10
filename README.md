@@ -7,7 +7,7 @@
 
 [2、BP算法实现](./Code/02_BP算法实现)
 
-- 从零开始构建ANN网络
+- 从零开始构建ANN网络（数学推导）
 
 [3、CNN实现](./Code/03_CNN实现)
 
@@ -18,6 +18,10 @@
 
 - 基础RNN模型预测正弦波
 - 基于LSTM对广州市降水量的研究（及爬虫实战）
+
+[5、Transformer实现](./Code/05_Transformer实现)
+
+- ricckker在线从零开始手搓Transformer
 
 ## Note📒⬇️[同步ricckker知乎](https://www.zhihu.com/column/c_1885651761630527854)
 
