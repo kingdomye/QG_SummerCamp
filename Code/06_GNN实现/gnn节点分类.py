@@ -1,5 +1,5 @@
 # ================================
-# @File         : gnn.py
+# @File         : GNN节点分类.py
 # @Time         : 2025/07/11
 # @Author       : Yingrui Chen
 # @description  : 简单GNN模型实现节点分类
