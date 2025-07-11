@@ -1,6 +1,6 @@
 # ================================
 # @File         : gnn.py
-# @Time         : 2025/07/10
+# @Time         : 2025/07/11
 # @Author       : Yingrui Chen
 # @description  : 简单GNN模型实现节点分类
 #                 Cora数据集是PyG内置的节点分类数据集，

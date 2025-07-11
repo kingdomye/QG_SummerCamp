@@ -25,6 +25,8 @@
 
 [6、GNN实现](./Code/06_GNN实现)
 
+- 简单GNN模型实现Cora数据集节点分类
+
 ## Note📒⬇️[同步ricckker知乎](https://www.zhihu.com/column/c_1885651761630527854)
 
 [1、Pytorch笔记](./Note/Daily/0707_0708/Pytorch基础.md)
