@@ -3,44 +3,24 @@
 
 ## Code💻⬇️
 
-[1、Pytorch系列代码](./Code/01_Pytorch)
-
-[2、BP算法实现](./Code/02_BP算法实现)
-
-- 从零开始构建ANN网络（数学推导）
-
-[3、CNN实现](./Code/03_CNN实现)
-
-- 基础CNN框架
-- 常见CNN模型：LeNet-5、AlexNet、VGG、ResNet的构建及训练
-
-[4、RNN实现](./Code/04_RNN实现)
-
-- 基础RNN模型预测正弦波
-- 基于LSTM对广州市降水量的研究（及爬虫实战）
-
-[5、Transformer实现](./Code/05_Transformer实现)
-
-- ricckker在线从零开始手搓Transformer
-
-[6、GNN实现](./Code/06_GNN实现)
-
-- 简单GNN模型实现Cora数据集节点分类
-- GNN模型实现ENZYMES数据集分类
+| 序号 | Code目录                                     | 简介                                                         |
+| ---- | -------------------------------------------- | ------------------------------------------------------------ |
+| 1    | [Pytorch系列代码](./Code/01_Pytorch)         | pytorch基础知识及构建基础网络                                |
+| 2    | [BP算法实现](./Code/02_BP算法实现)           | 从零开始构建ANN网络（数学推导）                              |
+| 3    | [CNN实现](./Code/03_CNN实现)                 | 基础CNN框架<br />常见CNN模型：LeNet-5、AlexNet、VGG、ResNet的构建及训练 |
+| 4    | [RNN实现](./Code/04_RNN实现)                 | 基础RNN模型预测正弦波<br />基于LSTM对广州市降水量的研究（及爬虫实战） |
+| 5    | [Transformer实现](./Code/05_Transformer实现) | ricckker在线从零开始手搓Transformer                          |
+| 6    | [GNN实现](./Code/06_GNN实现)                 | 简单GNN模型实现Cora数据集节点分类<br />GNN模型实现ENZYMES数据集分类 |
 
 ## Note📒⬇️[同步ricckker知乎](https://www.zhihu.com/column/c_1885651761630527854)
 
-[1、Pytorch笔记](./Note/Daily/0707_0708/Pytorch基础.md)
-
-[2、ANN网络搭建及BP数学推导](./Note/Daily/0707_0708/BP算法实现.md)
-
-[3、常见CNN模型](./Note/Daily/0707_0708/各类CNN.md)
-
-[4、git多人协作](./Note/Daily/0709_0710/git多人协作.md)
-
-[5、Linux基础](./Note/Daily/0711_0712/linux基础.md)
-
-
+| 序号 | Note目录                                                     | 简介                                                 |
+| ---- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| 1    | [Pytorch笔记](./Note/Daily/0707_0708/Pytorch基础.md)         | pytorch基础知识及构建基础网络                        |
+| 2    | [ANN网络搭建及BP数学推导](./Note/Daily/0707_0708/BP算法实现.md) | 数学公式推导BP算法，并利用numpy库从零开始构建ANN网络 |
+| 3    | [常见CNN模型](./Note/Daily/0707_0708/各类CNN.md)             | 介绍了几种常见的CNN模型                              |
+| 4    | [git多人协作](./Note/Daily/0709_0710/git多人协作.md)         | 简述了git配置操作和多人协作                          |
+| 5    | [Linux基础](./Note/Daily/0711_0712/linux基础.md)             | 简单记录了Linux的基础语法                            |
 
 ## 许可证（License）
 
