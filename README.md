@@ -21,6 +21,7 @@
 | 3    | [常见CNN模型](./Note/Daily/0707_0708/各类CNN.md)             | 介绍了几种常见的CNN模型                              |
 | 4    | [git多人协作](./Note/Daily/0709_0710/git多人协作.md)         | 简述了git配置操作和多人协作                          |
 | 5    | [Linux基础](./Note/Daily/0711_0712/linux基础.md)             | 简单记录了Linux的基础语法                            |
+| 6    | [Docker基础技术](./Note/Daily/0711_0712/Docker基础技术.md)   |                                                      |
 
 ## 许可证（License）
 
