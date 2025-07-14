@@ -34,7 +34,8 @@ def init():
 def update(frame):
     # 计算当前帧的螺旋线参数
     # 螺旋线从外到内，theta从0递减到-10π
-    theta = np.linspace(0, -10 * np.pi * (frame / total_frames), 1000)
+    print(frame)
+    theta = np.linspace(0, -16 * np.pi * (frame / total_frames), 1000)
     
     # 调整参数使螺旋线从 (start_x, 0) 开始并旋入原点
     a = start_x  # 初始半径
@@ -44,16 +45,12 @@ def update(frame):
     r = a + b * theta
     
     # 转换为笛卡尔坐标 (注意顺时针旋转需要交换sin和cos，并调整符号)
-    x = r * np.cos(-theta)  # 负号使旋转方向变为顺时针
-    y = r * np.sin(-theta)
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
     
     # 更新线条数据
     line.set_data(x[-100:], y[-100:])  # 只显示最近的100个点，让动画更流畅
     trace.set_data(x, y)  # 完整轨迹
-    
-    # 更新标题显示当前状态
-    # progress = (frame / total_frames) * 100
-    # title.set_text(f'顺时针旋入螺旋线 - 进度: {progress:.1f}%')
     
     return line, trace, title
 
@@ -64,6 +61,3 @@ ani = FuncAnimation(fig, update, frames=np.linspace(0, total_frames, total_frame
 # 显示动画
 plt.tight_layout()
 plt.show()
-
-# 如果需要保存动画，取消下面一行的注释
-# ani.save('spiral_inward.gif', writer='pillow', fps=20)
