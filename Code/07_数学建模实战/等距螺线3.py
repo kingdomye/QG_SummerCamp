@@ -18,6 +18,14 @@ head_length = 341 - 27.5                        # 龙头有效长度
 body_length = 341 - 27.5 * 2                    # 龙身有效长度
 
 
+# 极坐标转为平面直角坐标
+def polar_to_cartesian(theta):
+    r = theta * p / (2*np.pi)
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    return x, y
+
+
 # 计算两点之间的距离(极坐标形式)
 def calculate_distance(theta1, theta2):
     r1, r2 = theta1 * p / (2*np.pi), theta2 * p / (2*np.pi)
@@ -74,7 +82,69 @@ def get_all_points(head_theta, body_nums):
         x.append(new_x)
         y.append(new_y)
 
-    return x, y
+    return x, y, theta_list
+
+# 根据板凳节点坐标得到矩形坐标
+def get_rectangle_coordinates(theta1, theta2):
+    x_p1, y_p1 = polar_to_cartesian(theta1)
+    x_p2, y_p2 = polar_to_cartesian(theta2)
+
+    # 求解平行直线方程
+    def parallel_line():
+        A = y_p2 - y_p1
+        B = x_p1 - x_p2
+        C = -(A * x_p1 + B * y_p1)
+
+        C1 = C + 15 * np.sqrt(A ** 2 + B ** 2)
+        C2 = C - 15 * np.sqrt(A ** 2 + B ** 2)
+
+        return A, B, C1, C2
+    
+    # 求解垂直直线方程
+    def perpendicular_line():
+        A = x_p1 - x_p2
+        B = y_p1 - y_p2
+
+        C_p1 = -(A * x_p1 + B * y_p1)
+        C_p2 = -(A * x_p2 + B * y_p2)
+
+        C3 = C_p1 - 27.5 * np.sqrt(A ** 2 + B ** 2)
+        C4 = C_p2 + 27.5 * np.sqrt(A ** 2 + B ** 2)
+
+        return A, B, C3, C4
+    
+    # 根据直线方程求交点坐标
+    def calculate_intersection(l1, l2):
+        A1, B1, C1 = l1
+        A2, B2, C2 = l2
+
+        denominator = A1 * B2 - A2 * B1
+        if denominator == 0:
+            # 直线重合判断
+            if (A1 * B2 == A2 * B1) and (A1 * C2 == A2 * C1) and (B1 * C2 == B2 * C1):
+                return 'infinite'
+            else:
+                return 'parallel'
+
+        x = (B1 * C2 - B2 * C1) / denominator
+        y = (A2 * C1 - A1 * C2) / denominator
+
+        return (x, y)
+    
+    parallel = parallel_line()
+    perpendicular = perpendicular_line()
+
+    l1 = (parallel[0], parallel[1], parallel[2])
+    l2 = (parallel[0], parallel[1], parallel[3])
+    l3 = (perpendicular[0], perpendicular[1], perpendicular[2])
+    l4 = (perpendicular[0], perpendicular[1], perpendicular[3])
+
+    coord_A = calculate_intersection(l3, l1)
+    coord_B = calculate_intersection(l1, l4)
+    coord_C = calculate_intersection(l4, l2)
+    coord_D = calculate_intersection(l2, l3)
+
+    return [coord_A, coord_B, coord_C, coord_D]
 
 
 # 碰撞检测
@@ -103,11 +173,59 @@ def check_collision(coordinates_p, coordinates_rectangle)->bool:
         return True
     return False
 
+# 碰撞检测优化
+
+# 根据已知点求导数（切线斜率）（极坐标形式）
+def calculate_derivative(theta):
+    a = p / (2 * np.pi)
+    b = a * theta
+    c = np.tan(theta)
+    derivative = (a * c + b) / (a - b * c)
+
+    return derivative
+
+# 已知两斜率，求夹角余弦值
+def calculate_cos(k1, k2):
+    tan_theta = abs((k1 - k2) / (1 + k1 * k2))
+    cos_theta = np.sqrt(1 / (1 + tan_theta ** 2))
+
+    return cos_theta
+
+# 输入两点极坐标，求两点斜率
+def calculate_k(theta1, theta2):
+    r1, r2 = theta1 * p / (2*np.pi), theta2 * p / (2*np.pi)
+    x1, y1 = r1 * np.cos(theta1), r1 * np.sin(theta1)
+    x2, y2 = r2 * np.cos(theta2), r2 * np.sin(theta2)
+    k = (y2 - y1) / (x2 - x1)
+
+    return k
+
+# 根据前一个节点的速度求下一个节点的速度
+def calculate_next_speed(current_speed, current_theta, mode=None):
+    next_theta = None
+    if mode == 'head':
+        next_theta = find_next_point(current_theta, (current_theta, current_theta + np.pi), mode='head')
+    elif mode == 'body':
+        next_theta = find_next_point(current_theta, (current_theta, current_theta + np.pi), mode='body')
+    
+    k_theta1 = calculate_derivative(current_theta)
+    k_theta2 = calculate_derivative(next_theta)
+    k_line = calculate_k(current_theta, next_theta)
+
+    cos_theta1 = calculate_cos(k_theta1, k_line)
+    cos_theta2 = calculate_cos(k_theta2, k_line)
+
+    next_speed = current_speed * cos_theta1 / cos_theta2
+
+    return next_speed
+
 
 def update(frame):
     ax.clear()
     ax.set_aspect('equal')
     ax.plot(init_x, init_y, color='blue')
+    ax.axhline(0, color='black',linewidth=0.5)
+    ax.axvline(0, color='black',linewidth=0.5)
     ax.set_xlim(-1500, 1500)
     ax.set_ylim(-1500, 1500)
     
@@ -125,11 +243,24 @@ if __name__ == '__main__':
     omega = (2 * np.pi * v) / p
 
     frame = np.linspace(0, 300, 300)
-    ani = FuncAnimation(
-        fig, update, frames=frame, interval=30
-    )
+    # ani = FuncAnimation(
+    #     fig, update, frames=frame, interval=30
+    # )
+
+    # plt.show()
+
+    ax.plot(init_x, init_y, color='blue')
+    ax.axhline(0, color='black',linewidth=0.5)
+    ax.axvline(0, color='black',linewidth=0.5)
+
+    test_theta = theta[410]
+    x_ls, y_ls, theta_ls = get_all_points(test_theta, 221)
+    ax.scatter(x_ls, y_ls, color='red')
+
+    # 绘制矩形
+    for i in range(len(theta_ls)-1):
+        coordinates_rectangle = get_rectangle_coordinates(theta_ls[i], theta_ls[i+1])
+        for j in range(4):
+            ax.plot([coordinates_rectangle[j][0], coordinates_rectangle[(j+1)%4][0]], [coordinates_rectangle[j][1], coordinates_rectangle[(j+1)%4][1]], color='green')
 
     plt.show()
-    # coordinates_p = [0, 0]
-    # coordinates_rectangle = [(0, 0), (100, 0), (100, 100), (0, 100)]
-    # check_collision(coordinates_p, coordinates_rectangle)
