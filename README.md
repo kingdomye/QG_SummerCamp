@@ -12,6 +12,7 @@
 | 5    | [Transformer实现](./Code/05_Transformer实现) | ricckker在线从零开始手搓Transformer                          |
 | 6    | [GNN实现](./Code/06_GNN实现)                 | 简单GNN模型实现Cora数据集节点分类<br />GNN模型实现ENZYMES数据集分类 |
 | 7    | [数学建模实战](./Code/07_数学建模实战)       | 2024年本科组A题目，龙船模型实战                              |
+| 8    | [OpenCV](./Code/09_OpenCV)                   | OpenCV常见功能实现                                           |
 
 ------
 
