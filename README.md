@@ -30,7 +30,7 @@
 | 6    | [碧波行舟·Docker舟船操控术](./Note/Docker基础技术.md)    | 介绍了Docker的基本原理和基本操作方法以及其用途       |
 | 7    | [神功开物·ACC秘籍·特征工程](./Note/ACC秘籍：特征工程.md) | 结合实战经历，记录特征工程对模型准确率的提升效果     |
 | 8    | [游丝戏珠·爬虫美学](./Note/爬虫美学.md)                  |                                                      |
-| 9    | [灵溪心法·MindSpore框架](./Note/09_MindSpore框架.md)     |                                                      |
+| 9    | [灵溪心法·MindSpore框架](./Note/09_MindSpore框架.md)     | 屎来的，安装报错，一运行就报错🤭☺️                     |
 
 ## 许可证（License）
 
