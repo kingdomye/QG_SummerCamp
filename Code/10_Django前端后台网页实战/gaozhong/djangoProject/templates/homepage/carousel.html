@@ -1,0 +1,43 @@
+{% load static %}
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="{% static 'img/title1.png' %}" class="d-block w-100" alt="..." height=300>
+        <div class="container">
+            <div class="carousel-caption">
+                <h1>为您解决所有问题</h1>
+                <p>Solve all your difficulties!</p>
+                <p><a class="btn btn-lg btn-primary" href="#">提问答疑</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static 'img/title2.png' %}" class="d-block w-100" alt="..." height=300>
+        <div class="container">
+            <div class="carousel-caption text-end">
+                <h1>我们拥有最优质的资源</h1>
+                <p>We provide the most valuable sources</p>
+                <p><a class="btn btn-lg btn-primary" href="#">获取资源</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/title3.png' %}" class="d-block w-100" alt="..." height=300>
+        <div class="container">
+            <div class="carousel-caption text-start">
+                <h1>梦想在此点燃</h1>
+                <p>Fuel your dreams here!</p>
+                <p><a class="btn btn-lg btn-primary" href="#">现在注册</a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

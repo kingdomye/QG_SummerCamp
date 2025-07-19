@@ -3,16 +3,18 @@
 
 ## Code💻⬇️
 
-| 序号 | Code目录                                     | 简介                                                         |
-| ---- | -------------------------------------------- | ------------------------------------------------------------ |
-| 1    | [Pytorch系列代码](./Code/01_Pytorch)         | pytorch基础知识及构建基础网络                                |
-| 2    | [BP算法实现](./Code/02_BP算法实现)           | 从零开始构建ANN网络（数学推导）                              |
-| 3    | [CNN实现](./Code/03_CNN实现)                 | 基础CNN框架<br />常见CNN模型：LeNet-5、AlexNet、VGG、ResNet的构建及训练 |
-| 4    | [RNN实现](./Code/04_RNN实现)                 | 基础RNN模型预测正弦波<br />基于LSTM对广州市降水量的研究（及爬虫实战） |
-| 5    | [Transformer实现](./Code/05_Transformer实现) | ricckker在线从零开始手搓Transformer                          |
-| 6    | [GNN实现](./Code/06_GNN实现)                 | 简单GNN模型实现Cora数据集节点分类<br />GNN模型实现ENZYMES数据集分类 |
-| 7    | [数学建模实战](./Code/07_数学建模实战)       | 2024年本科组A题目，龙船模型实战                              |
-| 8    | [OpenCV](./Code/09_OpenCV)                   | OpenCV常见功能实现                                           |
+| 序号 | Code目录                                                   | 简介                                                         |
+| ---- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| 1    | [Pytorch系列代码](./Code/01_Pytorch)                       | pytorch基础知识及构建基础网络                                |
+| 2    | [BP算法实现](./Code/02_BP算法实现)                         | 从零开始构建ANN网络（数学推导）                              |
+| 3    | [CNN实现](./Code/03_CNN实现)                               | 基础CNN框架<br />常见CNN模型：LeNet-5、AlexNet、VGG、ResNet的构建及训练 |
+| 4    | [RNN实现](./Code/04_RNN实现)                               | 基础RNN模型预测正弦波<br />基于LSTM对广州市降水量的研究（及爬虫实战） |
+| 5    | [Transformer实现](./Code/05_Transformer实现)               | ricckker在线从零开始手搓Transformer                          |
+| 6    | [GNN实现](./Code/06_GNN实现)                               | 简单GNN模型实现Cora数据集节点分类<br />GNN模型实现ENZYMES数据集分类 |
+| 7    | [数学建模实战](./Code/07_数学建模实战)                     | 2024年本科组A题目，龙船模型实战                              |
+| 8    | [OpenCV](./Code/09_OpenCV)                                 | OpenCV常见功能实现                                           |
+| 9    | [Django前端后台网页实战](./Code/10_Django前端后台网页实战) | 利用Django库编写后台以及BootStrap5模版搭建高中学习网站实战代码 |
+| 10   | [MindSpore框架](./Code/11_MindSpore框架)                   |                                                              |
 
 ------
 
@@ -28,6 +30,7 @@
 | 6    | [碧波行舟·Docker舟船操控术](./Note/Docker基础技术.md)    | 介绍了Docker的基本原理和基本操作方法以及其用途       |
 | 7    | [神功开物·ACC秘籍·特征工程](./Note/ACC秘籍：特征工程.md) | 结合实战经历，记录特征工程对模型准确率的提升效果     |
 | 8    | [游丝戏珠·爬虫美学](./Note/爬虫美学.md)                  |                                                      |
+| 9    | [灵溪心法·MindSpore框架](./Note/09_MindSpore框架.md)     |                                                      |
 
 ## 许可证（License）
 
